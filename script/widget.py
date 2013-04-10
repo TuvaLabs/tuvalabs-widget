@@ -53,22 +53,22 @@ def question_api_call(username,api_key):
 		pass
 	
 	if data:
-		question = datax[0]["question_desc"] 
-		hints = data[0]["hints"][0]["hint_desc"] 
-		question_id = data[0]["id"]
-		answer_type = data[0]["questionanswer"]["answer_type"]
+		question = datax["question_desc"] 
+		hints = data["hints"]["hint_desc"] 
+		question_id = data["id"]
+		answer_type = data["questionanswer"]["answer_type"]
 		answer_html = ""
 		if answer_type=="MCR":
-			answer_choices = data[0]["questionanswer"]["answerchoice"]
+			answer_choices = data["questionanswer"]["answerchoice"]
 			for x in answer_choices:
 				answer_html += "<span><input type='radio' id='tuva_ans_"+str(x["choice_name"])+"' name='tuva_answer' value='"+ str(x["choice_value"]) +"'/>&nbsp;&nbsp;<label for='tuva_ans_"+str(x["choice_name"])+"'>"+ str(x["choice_name"]) +"</label></span><br/>"
 		elif answer_type=="MCC":
-			answer_choices = data[0]["questionanswer"]["answerchoice"]
+			answer_choices = data["questionanswer"]["answerchoice"]
 			for x in answer_choices:
 				answer_html += "<span><input type='checkbox' id='tuva_ans_"+str(x["choice_name"])+"' name='tuva_answer' value='"+ str(x["choice_value"]) +"'/>&nbsp;&nbsp;<label for='tuva_ans_"+str(x["choice_name"])+"'>"+ str(x["choice_name"]) +"</label></span><br/>"
 		else:
 			answer_html += "<span><input id='tuva_ans_wp' type='text'  name='tuva_answer'/><label for='tuva_ans_wp'></label></span><br/>"	
-		correct_answer = data[0]["questionanswer"]["correct_answer"]
+		correct_answer = data["questionanswer"]["correct_answer"]
 		result = { "fail":0, "question":question, "hints":hints, "question_id":question_id, "answer_html":answer_html, "correct_answer":correct_answer }
 	else:
 		result["fail"]=1
