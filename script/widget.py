@@ -39,7 +39,7 @@ def question_api_call(username,api_key):
 	#temp code for demo
 	offset_limit=[130,131,132,133]
 	offset = choice(offset_limit)
-	url = 'http://tuvalabs.com/api/v1/widgetquestions/?limit=1&offset=%s'%(offset)
+	url = 'http://tuvalabs.com/api/v1/widgetquestions/?limit=1&offset=130'#%(offset)
 
 	data = {} 
 	result = {}
