@@ -37,10 +37,10 @@ def question_api_call(username,api_key):
 	headers = {'content-type': 'application/json', 'Accept': 'application/json', 'username':username, 'api_key':api_key}
 	
 	#temp code for demo
-	offset_limit=[130,131,132,133]
+	offset_limit=[131,132,133,134]
 	offset = choice(offset_limit)
-	url = 'http://tuvalabs.com/api/v1/widgetquestions/?limit=1&offset=130'#%(offset)
-
+	#url = 'http://tuvalabs.com/api/v1/widgetquestions/?limit=1&offset=130'#%(offset)
+	url = 'http://tuvalabs.com/api/v1/widgetquestions/%s/'%(offset)
 	data = {} 
 	result = {}
 
@@ -53,22 +53,22 @@ def question_api_call(username,api_key):
 		pass
 	
 	if data:
-		question = data["objects"][0]["question_desc"] 
-		hints = data["objects"][0]["hints"][0]["hint_desc"] 
-		question_id = data["objects"][0]["id"]
-		answer_type = data["objects"][0]["questionanswer"]["answer_type"]
+		question = datax[0]["question_desc"] 
+		hints = data[0]["hints"][0]["hint_desc"] 
+		question_id = data[0]["id"]
+		answer_type = data[0]["questionanswer"]["answer_type"]
 		answer_html = ""
 		if answer_type=="MCR":
-			answer_choices = data["objects"][0]["questionanswer"]["answerchoice"]
+			answer_choices = data[0]["questionanswer"]["answerchoice"]
 			for x in answer_choices:
 				answer_html += "<span><input type='radio' id='tuva_ans_"+str(x["choice_name"])+"' name='tuva_answer' value='"+ str(x["choice_value"]) +"'/>&nbsp;&nbsp;<label for='tuva_ans_"+str(x["choice_name"])+"'>"+ str(x["choice_name"]) +"</label></span><br/>"
 		elif answer_type=="MCC":
-			answer_choices = data["objects"][0]["questionanswer"]["answerchoice"]
+			answer_choices = data[0]["questionanswer"]["answerchoice"]
 			for x in answer_choices:
 				answer_html += "<span><input type='checkbox' id='tuva_ans_"+str(x["choice_name"])+"' name='tuva_answer' value='"+ str(x["choice_value"]) +"'/>&nbsp;&nbsp;<label for='tuva_ans_"+str(x["choice_name"])+"'>"+ str(x["choice_name"]) +"</label></span><br/>"
 		else:
 			answer_html += "<span><input id='tuva_ans_wp' type='text'  name='tuva_answer'/><label for='tuva_ans_wp'></label></span><br/>"	
-		correct_answer = data["objects"][0]["questionanswer"]["correct_answer"]
+		correct_answer = data[0]["questionanswer"]["correct_answer"]
 		result = { "fail":0, "question":question, "hints":hints, "question_id":question_id, "answer_html":answer_html, "correct_answer":correct_answer }
 	else:
 		result["fail"]=1
