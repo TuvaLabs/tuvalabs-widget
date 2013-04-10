@@ -4,13 +4,13 @@ import cgi
 
 #Added by WF support:
 import cgitb; cgitb.enable()
-
+import sys
 import requests
 import json
 from HTMLParser import HTMLParser
 import re
 import logging
-import sys
+from random import choice
 
 print "Content-Type: text/javascript\n"
 
@@ -35,7 +35,11 @@ def strip_tags(html):
 
 def question_api_call(username,api_key):
 	headers = {'content-type': 'application/json', 'Accept': 'application/json', 'username':username, 'api_key':api_key}
-	url = 'http://tuvalabs.com/api/v1/widgetquestions/?limit=1'
+	
+	#temp code for demo
+	offset_limit=[130,131,132,133]
+	offset = choice(offset_limit)
+	url = 'http://tuvalabs.com/api/v1/widgetquestions/?limit=1&offset=%s'%(offset)
 
 	data = {} 
 	result = {}
