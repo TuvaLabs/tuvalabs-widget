@@ -43,7 +43,7 @@ def question_api_call(username,api_key):
 	try:
 		offset_limit=[13,14,15,16]
 		offset = choice(offset_limit)
-		url = 'http://tuvalabs.com/api/v1/widgetquestions/?limit=1&offset=%s'%(str(offset)
+		url = 'http://tuvalabs.com/api/v1/widgetquestions/?limit=1&offset=%s'%(str(offset))
 		
 		r = requests.get(url,headers=headers)
 		data = r.json()
