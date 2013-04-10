@@ -35,7 +35,7 @@ def strip_tags(html):
 
 def question_api_call(username,api_key):
 	headers = {'content-type': 'application/json', 'Accept': 'application/json', 'username':username, 'api_key':api_key}
-	url = 'http://demo.tuvalabs.com/api/v1/widgetquestions/?limit=1'
+	url = 'http://tuvalabs.com/api/v1/widgetquestions/?limit=1'
 
 	data = {} 
 	result = {}
